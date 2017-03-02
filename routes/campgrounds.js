@@ -25,7 +25,8 @@ router.post("/",middleWare.isLoggedin, function(req,res){
         username:req.user.username
     }
     Campground.create({
-        name: req.body.campgroundname, 
+        name: req.body.campgroundname,
+        price: req.body.campgroundprice,
         image: req.body.campgroundimage,
         description: req.body.campgrounddescription,
         author : author

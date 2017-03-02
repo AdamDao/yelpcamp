@@ -17,6 +17,7 @@ var indexRoutes = require("./routes/index")
 
 var methodOverride = require("method-override");
 
+var MAPS_API_KEY = "AIzaSyA6ET8sil7KTiV_l9cOyFMkXjpoVvb8lvM";
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine", "ejs");
@@ -46,6 +47,7 @@ app.use(function(req,res,next){
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
+    res.locals.mapsApiKey = MAPS_API_KEY;
     next();
 })
 

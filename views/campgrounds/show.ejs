@@ -8,12 +8,23 @@
                 <li class ="list-group-item">info 2</li>
                 <li class ="list-group-item">info 3</li>
             </div>
+            <div id="map">
+                    <script>
+                      var map;
+                      function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                          center: {lat: -34.397, lng: 150.644},
+                          zoom: 8
+                        });
+                      }
+                    </script>
+            </div>
         </div>
         <div class= "col-md-9">
             <div class = "thumbnail">
                 <img class ="img-responsive" src="<%=campGround.image%>">
                 <div class ="caption-full">
-                    <h4 class="pull-right">$9.00/night</h4>
+                    <h4 class="pull-right">$<%=campGround.price%>/night</h4>
                     <h4><a><%=campGround.name%></a></h4>
                     <p><%=campGround.description%></p>
                     <p><em>Submitted by: <%=campGround.author.username%></em></p>
@@ -31,10 +42,16 @@
                 <div class="text-right">
                     <a class = "btn btn-success" href = "/campgrounds/<%=campGround._id%>/comments/new">Leave a Review</a>
                 </div>
-                <hr>
+                <hr id="well">
                 <% campGround.comments.forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-md-12">
+                            <!--comment rating-->
+                            <%for(var i=0; i<comment.rating; i++){%>
+                                <i class="fa fa-star"></i>
+                            <% }%>
+                            <!--comment rating-->
+                            <br>
                             <strong><%=comment.author.username%></strong>
                             <span class="pull-right">10 days ago</span>
                             <p>
@@ -55,15 +72,8 @@
 </div>
 
 
-
-<div class="container">
-    <div class = "thumbnail">
-        
-    </div>
-    
-    </p><p>
-</div>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=mapsApiKey%>&callback=initMap"
+    async defer></script>
 
 
 
