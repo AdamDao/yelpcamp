@@ -17,9 +17,11 @@ var indexRoutes = require("./routes/index")
 
 var methodOverride = require("method-override");
 
-var MAPS_API_KEY = "AIzaSyA6ET8sil7KTiV_l9cOyFMkXjpoVvb8lvM";
 
-mongoose.connect("mongodb://localhost/yelp_camp");
+
+mongoose.connect(process.env.DATABASEURL);
+
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -47,7 +49,7 @@ app.use(function(req,res,next){
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
-    res.locals.mapsApiKey = MAPS_API_KEY;
+    res.locals.mapsApiKey = process.env.MAPS_API_KEY;
     next();
 })
 
